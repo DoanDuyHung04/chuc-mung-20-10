@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 🌹</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff1f5 0%, #ffe3ec 35%, #fbd7e5 68%, #fff0f4 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* ===== MUSIC ===== */
+        .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; }
+        .music-btn {
+            width: 55px; height: 55px; border-radius: 50%;
+            border: 2px solid rgba(217,61,134,0.45); background: rgba(217,61,134,0.22);
+            backdrop-filter: blur(10px); cursor: pointer; font-size: 24px; color: #fff;
+            transition: all 0.3s; animation: pulse-btn 2s ease-in-out infinite;
+        }
+        .music-btn:hover { background: rgba(217,61,134,0.45); transform: scale(1.1); box-shadow: 0 0 25px rgba(217,61,134,0.3); }
+        @keyframes pulse-btn { 0%,100%{box-shadow:0 0 10px rgba(217,61,134,0.2)}50%{box-shadow:0 0 25px rgba(217,61,134,0.4)} }
+        .music-label { color: #74394f; font-size: 12px; white-space: nowrap; }
+
+        /* ===== PARTICLES ===== */
+        .particles-container { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+        .particle { position: absolute; border-radius: 50%; animation: float-particle linear infinite; opacity: 0; }
+        .particle.heart { background:none; border-radius:0; }
+        .particle.heart::before { content:'💖'; font-size:inherit; }
+        .particle.star::before { content:'✨'; font-size:inherit; }
+        .particle.petal { background:linear-gradient(135deg,#ff6b9d,#ff9a9e); width:12px; height:18px; border-radius:50% 0 50% 50%; }
+        @keyframes float-particle {
+            0%{transform:translateY(100vh) rotate(0deg) scale(0);opacity:0}
+            10%{opacity:0.8;transform:translateY(90vh) rotate(36deg) scale(1)}
+            90%{opacity:0.6}
+            100%{transform:translateY(-10vh) rotate(360deg) scale(0.5);opacity:0}
+        }
+
+        /* ===== FALLING PETALS ===== */
+        .falling-petal { position:fixed; top:-50px; pointer-events:none; z-index:2; animation:fall-petal linear infinite; font-size:20px; }
+        @keyframes fall-petal {
+            0%{transform:translateY(-50px) rotate(0deg) translateX(0);opacity:0.9}
+            25%{transform:translateY(25vh) rotate(90deg) translateX(30px)}
+            50%{transform:translateY(50vh) rotate(180deg) translateX(-20px)}
+            75%{transform:translateY(75vh) rotate(270deg) translateX(40px)}
+            100%{transform:translateY(105vh) rotate(360deg) translateX(10px);opacity:0.2}
+        }
+
+        /* ===== MAIN ===== */
+        .main-container { position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; padding:40px 20px; min-height:100vh; }
+
+        /* ===== HEADER ===== */
+        .header { text-align:center; margin-bottom:40px; animation:fadeInDown 1.5s ease-out; }
+        .header h1 {
+            font-family:'Great Vibes',cursive; font-size:clamp(2.5rem,6vw,5rem);
+            background:linear-gradient(135deg,#ff6b9d,#ffa8c5,#ff6b9d,#ff9a76); background-size:300% 300%;
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            animation:gradient-shift 4s ease infinite; filter:drop-shadow(0 0 20px rgba(255,107,157,0.4)); line-height:1.3;
+        }
+        .header .date-badge {
+            display:inline-block; margin-top:15px; padding:10px 35px;
+            background:linear-gradient(135deg,#ff6b9d,#c44569); border-radius:50px; color:white;
+            font-family:'Playfair Display',serif; font-size:clamp(1.2rem,3vw,2rem); font-weight:700;
+            letter-spacing:3px; box-shadow:0 8px 32px rgba(255,107,157,0.4); animation:pulse-badge 2s ease-in-out infinite;
+        }
+        @keyframes pulse-badge { 0%,100%{transform:scale(1)}50%{transform:scale(1.05)} }
+        @keyframes gradient-shift { 0%,100%{background-position:0% 50%}50%{background-position:100% 50%} }
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-50px)}to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)} }
+
+        /* =============================================================
+           ===== LILY GARDEN - HOA GẮN LIỀN THÂN =====
+           ============================================================= */
+        .lily-garden {
+            display: flex; justify-content: center; align-items: flex-end;
+            gap: 8px; margin: 30px 0 10px; position: relative;
+            width: 100%; max-width: 900px;
+        }
+
+        /* Each lily is a single unit: relative container, stem at bottom, bloom at top */
+        .lily-unit {
+            position: relative;
+            width: 90px;
+            opacity: 0;
+            animation: lily-enter 1.8s ease-out forwards;
+        }
+        .lily-unit:nth-child(1) { animation-delay: 0.2s; }
+        .lily-unit:nth-child(2) { animation-delay: 0.5s; }
+        .lily-unit:nth-child(3) { animation-delay: 0s;   }
+        .lily-unit:nth-child(4) { animation-delay: 0.7s; }
+        .lily-unit:nth-child(5) { animation-delay: 0.3s; }
+        .lily-unit:nth-child(6) { animation-delay: 0.8s; }
+        .lily-unit:nth-child(7) { animation-delay: 0.15s; }
+
+        @keyframes lily-enter {
+            0%   { opacity:0; transform:translateY(30px); }
+            60%  { opacity:1; transform:translateY(-3px); }
+            100% { opacity:1; transform:translateY(0); }
+        }
+
+        /* Sway the whole unit gently */
+        .lily-unit { animation: lily-enter 1.8s ease-out forwards, unit-sway var(--sway-dur, 5s) ease-in-out infinite 3s; transform-origin: bottom center; }
+        @keyframes unit-sway {
+            0%,100% { transform: rotate(0deg); }
+            25%     { transform: rotate(var(--sway-deg, 2deg)); }
+            75%     { transform: rotate(calc(var(--sway-deg, 2deg) * -1)); }
+        }
+        .lily-unit:nth-child(odd)  { --sway-deg: 2.5deg; --sway-dur: 4.5s; }
+        .lily-unit:nth-child(even) { --sway-deg: -2deg;  --sway-dur: 5.5s; }
+
+        /* STEM: absolutely positioned, pinned to bottom center */
+        .lily-unit .stem-wrap {
+            display: flex; flex-direction: column; align-items: center;
+            position: relative; width: 100%;
+        }
+
+        .lily-unit .stem-line {
+            width: 5px;
+            background: linear-gradient(to top, #1b7a3d, #2ecc71, #27ae60);
+            border-radius: 3px;
+            margin: 0 auto;
+            transform-origin: bottom center;
+            animation: stem-grow 1.5s ease-out forwards;
+            transform: scaleY(0);
+        }
+        @keyframes stem-grow { 0%{transform:scaleY(0)}80%{transform:scaleY(1.03)}100%{transform:scaleY(1)} }
+
+        /* Leaves on stem */
+        .stem-wrap .leaf {
+            position: absolute;
+            width: 36px; height: 13px;
+            background: linear-gradient(135deg, #27ae60, #55efc4);
+            border-radius: 50%;
+            opacity: 0;
+            animation: leaf-out 0.8s ease-out forwards;
+        }
+        .stem-wrap .leaf.l { left: 5px; transform: rotate(-40deg) scale(0); transform-origin: right center; --lr: -40deg; }
+        .stem-wrap .leaf.r { right: 5px; transform: rotate(40deg) scale(0); transform-origin: left center; --lr: 40deg; }
+        @keyframes leaf-out { 0%{opacity:0;transform:rotate(0deg) scale(0)}100%{opacity:1;transform:rotate(var(--lr)) scale(1)} }
+
+        /* BLOOM: sits directly on top of stem, no gap */
+        .lily-unit .bloom-head {
+            position: relative;
+            width: 90px; height: 90px;
+            margin: 0 auto -4px; /* slight overlap onto stem top */
+            animation: bloom-breathe 3.5s ease-in-out infinite 4s;
+        }
+        @keyframes bloom-breathe {
+            0%,100% { transform: scale(1) rotate(0deg); }
+            50%     { transform: scale(1.06) rotate(2deg); }
+        }
+        .lily-unit:nth-child(even) .bloom-head {
+            animation: bloom-breathe-alt 4s ease-in-out infinite 4.3s;
+        }
+        @keyframes bloom-breathe-alt {
+            0%,100% { transform: scale(1) rotate(0deg); }
+            50%     { transform: scale(1.05) rotate(-2deg); }
+        }
+
+        /* Lily petals */
+        .petal {
+            position: absolute;
+            width: 24px; height: 48px;
+            border-radius: 50% 50% 40% 40%;
+            top: 50%; left: 50%;
+            margin-left: -12px; margin-top: -48px;
+            transform-origin: center bottom;
+            opacity: 0;
+            transform: rotate(var(--a)) scale(0);
+            animation: petal-open 1.5s ease-out var(--d) forwards, petal-dance 3.5s ease-in-out infinite calc(var(--d) + 2s);
+            box-shadow: inset 0 -6px 12px rgba(0,0,0,0.08);
+        }
+        @keyframes petal-open {
+            0%   { opacity:0; transform: rotate(var(--a)) scale(0) translateY(10px); }
+            40%  { opacity:0.7; }
+            75%  { transform: rotate(var(--a)) scale(1.12) translateY(-2px); opacity:1; }
+            100% { opacity:1; transform: rotate(var(--a)) scale(1) translateY(0); }
+        }
+        @keyframes petal-dance {
+            0%,100% { transform: rotate(var(--a)) scale(1) translateY(0); }
+            33%     { transform: rotate(calc(var(--a) + 3deg)) scale(1.04) translateY(-2px); }
+            66%     { transform: rotate(calc(var(--a) - 2deg)) scale(0.97) translateY(1px); }
+        }
+
+        /* 6 petal positions */
+        .petal:nth-child(1) { --a:0deg;   --d:2s; }
+        .petal:nth-child(2) { --a:60deg;  --d:2.2s; }
+        .petal:nth-child(3) { --a:120deg; --d:2.4s; }
+        .petal:nth-child(4) { --a:180deg; --d:2.6s; }
+        .petal:nth-child(5) { --a:240deg; --d:2.8s; }
+        .petal:nth-child(6) { --a:300deg; --d:3s; }
+
+        /* Petal vein */
+        .petal::after {
+            content:''; position:absolute; bottom:5px; left:50%; width:2px; height:55%;
+            background:rgba(255,255,255,0.3); border-radius:2px; transform:translateX(-50%);
+        }
+
+        /* Color variants */
+        .c-pink   .petal { background: linear-gradient(to top, #e84393, #fd79a8, #ffb8d0); }
+        .c-red    .petal { background: linear-gradient(to top, #c0392b, #e74c3c, #ff8a80); }
+        .c-coral  .petal { background: linear-gradient(to top, #d63031, #ff7675, #fab1a0); }
+        .c-white  .petal { background: linear-gradient(to top, #dfe6e9, #f5f5f5, #ffffff); }
+        .c-peach  .petal { background: linear-gradient(to top, #e17055, #fab1a0, #ffeaa7); }
+        .c-violet .petal { background: linear-gradient(to top, #6c5ce7, #a29bfe, #dfe6e9); }
+        .c-gold   .petal { background: linear-gradient(to top, #e67e22, #f9ca24, #ffeaa7); }
+
+        /* Pistil + Stamen center */
+        .bloom-center {
+            position: absolute; top:50%; left:50%;
+            transform: translate(-50%,-50%) scale(0); z-index: 5;
+            animation: pop-in 0.7s ease-out 3.5s forwards;
+        }
+        @keyframes pop-in { 0%{transform:translate(-50%,-50%) scale(0)}65%{transform:translate(-50%,-50%) scale(1.3)}100%{transform:translate(-50%,-50%) scale(1)} }
+
+        .pistil {
+            width: 12px; height: 12px;
+            background: radial-gradient(circle, #f9ca24, #e67e22);
+            border-radius: 50%; box-shadow: 0 0 10px rgba(249,202,36,0.7);
+            animation: pistil-glow 2s ease-in-out infinite 4s;
+        }
+        @keyframes pistil-glow { 0%,100%{box-shadow:0 0 8px rgba(249,202,36,0.5)}50%{box-shadow:0 0 20px rgba(249,202,36,1)} }
+
+        .stamen {
+            position: absolute; width: 2px; height: 16px;
+            background: linear-gradient(to top, #27ae60, #f9ca24);
+            border-radius: 1px; top:50%; left:50%;
+            transform-origin: bottom center;
+            transform: translate(-50%,-100%) rotate(var(--sa)) scale(0);
+            animation: stamen-pop 0.5s ease-out var(--sd) forwards;
+        }
+        .stamen::after { content:''; position:absolute; top:-3px; left:-2px; width:6px; height:6px; background:radial-gradient(circle,#f0932b,#e67e22); border-radius:50%; }
+        @keyframes stamen-pop { 0%{transform:translate(-50%,-100%) rotate(var(--sa)) scale(0)}100%{transform:translate(-50%,-100%) rotate(var(--sa)) scale(1)} }
+        .stamen:nth-of-type(1) { --sa:0deg;   --sd:3.6s; }
+        .stamen:nth-of-type(2) { --sa:72deg;  --sd:3.7s; }
+        .stamen:nth-of-type(3) { --sa:144deg; --sd:3.8s; }
+        .stamen:nth-of-type(4) { --sa:216deg; --sd:3.9s; }
+        .stamen:nth-of-type(5) { --sa:288deg; --sd:4s;   }
+
+        /* ===== BIG BLOOM (centerpiece) ===== */
+        .bloom-section { margin: 50px 0; text-align: center; }
+        .big-bloom {
+            display: inline-block; position: relative; width: 220px; height: 220px;
+            animation: big-breathe 4s ease-in-out infinite 5s;
+        }
+        @keyframes big-breathe {
+            0%,100% { transform:scale(1) rotate(0deg); filter:brightness(1); }
+            50%     { transform:scale(1.08) rotate(3deg); filter:brightness(1.1); }
+        }
+        .big-bloom::before {
+            content:''; position:absolute; top:50%; left:50%; width:200px; height:200px;
+            transform:translate(-50%,-50%); border-radius:50%;
+            background:radial-gradient(circle, rgba(255,107,157,0.3), transparent 70%);
+            animation: glow-ring 3s ease-in-out infinite 5s; pointer-events:none;
+        }
+        @keyframes glow-ring { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.5}50%{transform:translate(-50%,-50%) scale(1.4);opacity:1} }
+
+        .big-bloom .petal { width:38px; height:78px; margin-left:-19px; margin-top:-78px; }
+        /* 8 outer */
+        .big-bloom .petal:nth-child(1)  { --a:0deg;   --d:1.5s; }
+        .big-bloom .petal:nth-child(2)  { --a:45deg;  --d:1.7s; }
+        .big-bloom .petal:nth-child(3)  { --a:90deg;  --d:1.9s; }
+        .big-bloom .petal:nth-child(4)  { --a:135deg; --d:2.1s; }
+        .big-bloom .petal:nth-child(5)  { --a:180deg; --d:2.3s; }
+        .big-bloom .petal:nth-child(6)  { --a:225deg; --d:2.5s; }
+        .big-bloom .petal:nth-child(7)  { --a:270deg; --d:2.7s; }
+        .big-bloom .petal:nth-child(8)  { --a:315deg; --d:2.9s; }
+        /* 8 inner */
+        .big-bloom .inner { width:26px; height:55px; margin-left:-13px; margin-top:-55px; z-index:3; }
+        .big-bloom .inner:nth-child(9)  { --a:22.5deg;  --d:3.1s; }
+        .big-bloom .inner:nth-child(10) { --a:67.5deg;  --d:3.25s; }
+        .big-bloom .inner:nth-child(11) { --a:112.5deg; --d:3.4s; }
+        .big-bloom .inner:nth-child(12) { --a:157.5deg; --d:3.55s; }
+        .big-bloom .inner:nth-child(13) { --a:202.5deg; --d:3.7s; }
+        .big-bloom .inner:nth-child(14) { --a:247.5deg; --d:3.85s; }
+        .big-bloom .inner:nth-child(15) { --a:292.5deg; --d:4s; }
+        .big-bloom .inner:nth-child(16) { --a:337.5deg; --d:4.15s; }
+        .big-bloom .petal { background: linear-gradient(to top, #c44569, #e84393, #fd79a8, #ffb8d0); }
+        .big-bloom .inner { background: linear-gradient(to top, #e84393, #ff6b9d, #ffa8c5); }
+        .big-bloom .bloom-center { animation-delay: 4.4s; }
+        .big-bloom .pistil { width:20px; height:20px; }
+        .big-bloom .stamen { height:24px; }
+        .big-bloom .stamen::after { width:8px; height:8px; left:-3px; top:-4px; }
+        .big-bloom .stamen:nth-of-type(1) { --sd:4.5s; }
+        .big-bloom .stamen:nth-of-type(2) { --sd:4.6s; }
+        .big-bloom .stamen:nth-of-type(3) { --sd:4.7s; }
+        .big-bloom .stamen:nth-of-type(4) { --sd:4.8s; }
+        .big-bloom .stamen:nth-of-type(5) { --sd:4.9s; }
+        .big-bloom .stamen:nth-of-type(6) { --sd:5s;   }
+
+        /* ===== CARD ===== */
+        .card-wrapper { perspective:1200px; margin:40px 0; animation:fadeInUp 1.5s ease-out 1s forwards; opacity:0; }
+        .greeting-card {
+            width:clamp(340px,85vw,650px);
+            background:linear-gradient(145deg,rgba(255,255,255,0.88),rgba(255,248,251,0.82));
+            backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.9); border-radius:30px;
+            padding:50px 40px; position:relative; overflow:hidden;
+            box-shadow:0 25px 60px rgba(117,54,88,0.14),0 0 40px rgba(255,107,157,0.15),inset 0 1px 0 rgba(255,255,255,0.8);
+            animation:card-glow 4s ease-in-out infinite;
+        }
+        @keyframes card-glow { 0%,100%{box-shadow:0 25px 60px rgba(117,54,88,0.14),0 0 40px rgba(255,107,157,0.15)}50%{box-shadow:0 25px 60px rgba(117,54,88,0.18),0 0 60px rgba(255,107,157,0.3)} }
+        .corner-deco { position:absolute; width:80px; height:80px; opacity:0.5; }
+        .corner-deco.tl { top:10px;left:10px;border-top:3px solid #ff6b9d;border-left:3px solid #ff6b9d;border-radius:15px 0 0 0; }
+        .corner-deco.tr { top:10px;right:10px;border-top:3px solid #ff6b9d;border-right:3px solid #ff6b9d;border-radius:0 15px 0 0; }
+        .corner-deco.bl { bottom:10px;left:10px;border-bottom:3px solid #ff6b9d;border-left:3px solid #ff6b9d;border-radius:0 0 0 15px; }
+        .corner-deco.br { bottom:10px;right:10px;border-bottom:3px solid #ff6b9d;border-right:3px solid #ff6b9d;border-radius:0 0 15px 0; }
+
+        .card-flower-img { text-align:center; margin-bottom:25px; }
+        .card-flower-img .emoji-bouquet { font-size:60px; animation:sway 3s ease-in-out infinite; display:inline-block; }
+        @keyframes sway { 0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)} }
+        .card-title {
+            font-family:'Great Vibes',cursive; font-size:clamp(2rem,5vw,3.2rem); text-align:center;
+            background:linear-gradient(135deg,#ff6b9d,#ffa8c5,#ff9a76,#ff6b9d); background-size:300% 300%;
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            animation:gradient-shift 3s ease infinite; margin-bottom:20px; line-height:1.4;
+        }
+        .card-divider { width:120px; height:2px; background:linear-gradient(to right,transparent,#ff6b9d,transparent); margin:20px auto; position:relative; }
+        .card-divider::after { content:'🌸'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:18px; }
+        .card-message { font-family:'Dancing Script',cursive; font-size:clamp(1.1rem,2.5vw,1.5rem); color:#593545; text-align:center; line-height:2; margin:25px 0; }
+        .card-message p { margin-bottom:15px; }
+        .card-message .highlight { color:#b52f70; font-weight:700; font-size:1.15em; text-shadow:none; }
+        .card-signature { text-align:center; margin-top:30px; font-family:'Great Vibes',cursive; font-size:1.6rem; color:#a83868; }
+        .card-footer-flowers { text-align:center; font-size:30px; margin-top:20px; letter-spacing:8px; }
+
+        /* ===== GALLERY WITH CSS FLOWERS ===== */
+        .gallery { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:40px 0; animation:fadeInUp 1.5s ease-out 2s forwards; opacity:0; }
+        .gallery-item {
+            width: 210px; height: 280px; border-radius: 20px;
+            position: relative; border: 3px solid rgba(255,255,255,0.92);
+            box-shadow: 0 15px 35px rgba(173,87,120,0.18); transition: all 0.4s; cursor: pointer;
+            background: linear-gradient(145deg, #fffafd, #f3c2d5 72%, #e9a9c3);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .gallery-item:hover { transform:translateY(-6px); box-shadow:0 22px 42px rgba(173,87,120,0.25); border-color:#fff; }
+        .gallery-label {
+            position:absolute; bottom:0; left:0; right:0; padding:15px 10px;
+            background:linear-gradient(90deg, rgba(255,241,247,0.96), rgba(255,225,237,0.96));
+            border-top:1px solid rgba(255,255,255,0.8); color:#74394f;
+            font-family:'Dancing Script',cursive; font-size:1.1rem; text-align:center; z-index:10;
+        }
+
+        /* --- Gallery Lily (looping bloom) --- */
+        .g-lily {
+            position: relative; width: 100px; height: 100px;
+            animation: g-lily-loop 5s ease-in-out infinite;
+        }
+        @keyframes g-lily-loop {
+            0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+            15%  { opacity: 1; }
+            30%  { transform: scale(1.1) rotate(5deg); }
+            50%  { transform: scale(1) rotate(0deg); opacity: 1; }
+            75%  { transform: scale(1.05) rotate(-3deg); opacity: 1; }
+            88%  { opacity: 0.5; transform: scale(0.9) rotate(5deg); }
+            100% { transform: scale(0) rotate(-30deg); opacity: 0; }
+        }
+        .g-lily .gp {
+            position: absolute; width: 22px; height: 44px;
+            border-radius: 50% 50% 40% 40%;
+            top: 50%; left: 50%; margin-left: -11px; margin-top: -44px;
+            transform-origin: center bottom;
+            background: linear-gradient(to top, #e84393, #fd79a8, #ffb8d0);
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.06);
+        }
+        .g-lily .gp::after { content:''; position:absolute; bottom:4px; left:50%; width:2px; height:50%; background:rgba(255,255,255,0.25); border-radius:2px; transform:translateX(-50%); }
+        .g-lily .gp:nth-child(1) { transform: rotate(0deg); }
+        .g-lily .gp:nth-child(2) { transform: rotate(60deg); }
+        .g-lily .gp:nth-child(3) { transform: rotate(120deg); }
+        .g-lily .gp:nth-child(4) { transform: rotate(180deg); }
+        .g-lily .gp:nth-child(5) { transform: rotate(240deg); }
+        .g-lily .gp:nth-child(6) { transform: rotate(300deg); }
+        .g-lily .gc {
+            position: absolute; top:50%; left:50%; width:14px; height:14px;
+            background: radial-gradient(circle, #f9ca24, #e67e22);
+            border-radius: 50%; transform: translate(-50%,-50%); z-index:5;
+            box-shadow: 0 0 12px rgba(249,202,36,0.7);
+        }
+
+        /* Stem under gallery lily */
+        .g-lily-stem {
+            width: 4px; height: 70px;
+            background: linear-gradient(to top, #1b7a3d, #2ecc71);
+            border-radius: 2px; margin-top: -4px;
+            animation: g-lily-loop-stem 5s ease-in-out infinite;
+        }
+        @keyframes g-lily-loop-stem {
+            0%   { transform: scaleY(0); opacity: 0; }
+            15%  { transform: scaleY(1); opacity: 1; }
+            50%  { transform: scaleY(1); opacity: 1; }
+            88%  { opacity: 0.5; }
+            100% { transform: scaleY(0); opacity: 0; }
+        }
+
+        /* --- Gallery Rose (spinning petals) --- */
+        .g-rose {
+            position: relative; width: 90px; height: 90px;
+            animation: g-rose-spin 8s linear infinite;
+        }
+        @keyframes g-rose-spin { 0%{transform:rotate(0deg)}100%{transform:rotate(360deg)} }
+        .g-rose .rp {
+            position: absolute; width: 30px; height: 30px;
+            border-radius: 50% 0 50% 50%;
+            top: 50%; left: 50%;
+            transform-origin: 0 0;
+        }
+        .g-rose .rp:nth-child(1) { transform: rotate(0deg) translate(10px,-10px); background: linear-gradient(135deg,#e74c3c,#ff6b6b); }
+        .g-rose .rp:nth-child(2) { transform: rotate(45deg) translate(10px,-10px); background: linear-gradient(135deg,#ff6b9d,#fd79a8); }
+        .g-rose .rp:nth-child(3) { transform: rotate(90deg) translate(10px,-10px); background: linear-gradient(135deg,#e74c3c,#ff8a80); }
+        .g-rose .rp:nth-child(4) { transform: rotate(135deg) translate(10px,-10px); background: linear-gradient(135deg,#ff6b9d,#ffa8c5); }
+        .g-rose .rp:nth-child(5) { transform: rotate(180deg) translate(10px,-10px); background: linear-gradient(135deg,#e74c3c,#ff6b6b); }
+        .g-rose .rp:nth-child(6) { transform: rotate(225deg) translate(10px,-10px); background: linear-gradient(135deg,#ff6b9d,#fd79a8); }
+        .g-rose .rp:nth-child(7) { transform: rotate(270deg) translate(10px,-10px); background: linear-gradient(135deg,#e74c3c,#ff8a80); }
+        .g-rose .rp:nth-child(8) { transform: rotate(315deg) translate(10px,-10px); background: linear-gradient(135deg,#ff6b9d,#ffa8c5); }
+        .g-rose .rc {
+            position: absolute; top:50%; left:50%; width:20px; height:20px;
+            background: radial-gradient(circle,#f9ca24,#e67e22); border-radius:50%;
+            transform: translate(-50%,-50%); z-index:5;
+            box-shadow: 0 0 15px rgba(249,202,36,0.6);
+            animation: g-rose-spin-reverse 8s linear infinite;
+        }
+        @keyframes g-rose-spin-reverse { 0%{transform:translate(-50%,-50%) rotate(0deg)}100%{transform:translate(-50%,-50%) rotate(-360deg)} }
+
+        /* --- Gallery Lotus (pulsing bloom) --- */
+        .g-lotus {
+            position: relative; width: 100px; height: 100px;
+            animation: lotus-pulse 3s ease-in-out infinite;
+        }
+        @keyframes lotus-pulse {
+            0%,100% { transform: scale(1); }
+            50%     { transform: scale(1.12); }
+        }
+        .g-lotus .lp {
+            position: absolute; width: 20px; height: 42px;
+            border-radius: 50%;
+            top: 50%; left: 50%; margin-left: -10px; margin-top: -42px;
+            transform-origin: center bottom;
+        }
+        .g-lotus .lp:nth-child(1)  { transform:rotate(0deg);   background:linear-gradient(to top,#ff6b9d,#ffc0cb); }
+        .g-lotus .lp:nth-child(2)  { transform:rotate(36deg);  background:linear-gradient(to top,#fd79a8,#ffd1dc); }
+        .g-lotus .lp:nth-child(3)  { transform:rotate(72deg);  background:linear-gradient(to top,#ff6b9d,#ffc0cb); }
+        .g-lotus .lp:nth-child(4)  { transform:rotate(108deg); background:linear-gradient(to top,#fd79a8,#ffd1dc); }
+        .g-lotus .lp:nth-child(5)  { transform:rotate(144deg); background:linear-gradient(to top,#ff6b9d,#ffc0cb); }
+        .g-lotus .lp:nth-child(6)  { transform:rotate(180deg); background:linear-gradient(to top,#fd79a8,#ffd1dc); }
+        .g-lotus .lp:nth-child(7)  { transform:rotate(216deg); background:linear-gradient(to top,#ff6b9d,#ffc0cb); }
+        .g-lotus .lp:nth-child(8)  { transform:rotate(252deg); background:linear-gradient(to top,#fd79a8,#ffd1dc); }
+        .g-lotus .lp:nth-child(9)  { transform:rotate(288deg); background:linear-gradient(to top,#ff6b9d,#ffc0cb); }
+        .g-lotus .lp:nth-child(10) { transform:rotate(324deg); background:linear-gradient(to top,#fd79a8,#ffd1dc); }
+        /* Inner */
+        .g-lotus .li {
+            position: absolute; width: 14px; height: 30px;
+            border-radius: 50%;
+            top: 50%; left: 50%; margin-left: -7px; margin-top: -30px;
+            transform-origin: center bottom; z-index: 3;
+            animation: lotus-inner 3s ease-in-out infinite;
+        }
+        @keyframes lotus-inner {
+            0%,100% { transform: rotate(var(--la)) scale(1); }
+            50%     { transform: rotate(var(--la)) scale(1.1); }
+        }
+        .g-lotus .li:nth-child(11) { --la:18deg;  background:linear-gradient(to top,#e84393,#ff9ff3); }
+        .g-lotus .li:nth-child(12) { --la:90deg;  background:linear-gradient(to top,#e84393,#ffa8c5); }
+        .g-lotus .li:nth-child(13) { --la:162deg; background:linear-gradient(to top,#e84393,#ff9ff3); }
+        .g-lotus .li:nth-child(14) { --la:234deg; background:linear-gradient(to top,#e84393,#ffa8c5); }
+        .g-lotus .li:nth-child(15) { --la:306deg; background:linear-gradient(to top,#e84393,#ff9ff3); }
+        .g-lotus .lc {
+            position:absolute; top:50%; left:50%; width:18px; height:18px;
+            background:radial-gradient(circle,#f9ca24,#e67e22); border-radius:50%;
+            transform:translate(-50%,-50%); z-index:5;
+            box-shadow:0 0 14px rgba(249,202,36,0.8);
+        }
+
+        /* ===== SPARKLE ===== */
+        @keyframes sparkle-fly { 0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(0);opacity:0} }
+
+        /* ===== WISHES ===== */
+        .wishes-section { margin:50px 0; animation:fadeInUp 1.5s ease-out 2.5s forwards; opacity:0; }
+        .wish-card {
+            width:clamp(340px,85vw,650px);
+            background:linear-gradient(145deg,rgba(255,255,255,0.9),rgba(255,248,251,0.84));
+            backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.9); border-radius:25px;
+            padding:45px 35px; text-align:center; box-shadow:0 20px 50px rgba(117,54,88,0.14);
+        }
+        .wish-title { font-family:'Great Vibes',cursive; font-size:clamp(1.8rem,4vw,2.8rem); color:#a83868; margin-bottom:25px; }
+        .wishes-list { list-style:none; padding:0; }
+        .wishes-list li {
+            font-family:'Dancing Script',cursive; font-size:clamp(1rem,2.2vw,1.3rem);
+            color:#593545; padding:12px 0;
+            border-bottom:1px solid rgba(168,56,104,0.16); line-height:1.6;
+            opacity:0; animation:wish-appear 0.8s ease-out forwards;
+        }
+        .wishes-list li:nth-child(1){animation-delay:3s}.wishes-list li:nth-child(2){animation-delay:3.3s}
+        .wishes-list li:nth-child(3){animation-delay:3.6s}.wishes-list li:nth-child(4){animation-delay:3.9s}
+        .wishes-list li:nth-child(5){animation-delay:4.2s}
+        .wishes-list li:last-child{border-bottom:none} .wishes-list li::before{content:'🌺 '}
+        @keyframes wish-appear { from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)} }
+
+        /* ===== FOOTER ===== */
+        .footer { margin-top:60px; margin-bottom:40px; text-align:center; animation:fadeInUp 1.5s ease-out 4.5s forwards; opacity:0; }
+        .footer p { font-family:'Dancing Script',cursive; font-size:1.2rem; color:#74394f; margin-bottom:15px; }
+        .footer .hearts { font-size:30px; letter-spacing:10px; animation:color-cycle 3s ease infinite; }
+        @keyframes color-cycle { 0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(30deg)} }
+
+        /* ===== BUTTERFLY ===== */
+        .butterfly { position:fixed; font-size:28px; z-index:5; animation:fly-around 20s linear infinite; pointer-events:none; }
+        .butterfly:nth-child(2) { animation-delay:-7s; font-size:22px; }
+        @keyframes fly-around {
+            0%{top:60%;left:-5%;transform:rotate(10deg) scaleX(1)}15%{top:30%;left:20%;transform:rotate(-5deg) scaleX(1)}
+            30%{top:15%;left:50%;transform:rotate(15deg) scaleX(-1)}45%{top:40%;left:75%;transform:rotate(-10deg) scaleX(-1)}
+            60%{top:70%;left:85%;transform:rotate(5deg) scaleX(-1)}75%{top:50%;left:40%;transform:rotate(-15deg) scaleX(1)}
+            90%{top:20%;left:10%;transform:rotate(10deg) scaleX(1)}100%{top:60%;left:-5%;transform:rotate(10deg) scaleX(1)}
+        }
+
+        /* Floating flowers */
+        .floating-flowers { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:3; }
+        .float-flower { position:absolute; font-size:24px; opacity:0.4; animation:float-slow 15s ease-in-out infinite; }
+        .float-flower:nth-child(1){top:10%;left:5%;animation-delay:0s}
+        .float-flower:nth-child(2){top:20%;right:8%;animation-delay:-3s;font-size:30px}
+        .float-flower:nth-child(3){top:60%;left:3%;animation-delay:-6s}
+        .float-flower:nth-child(4){top:80%;right:5%;animation-delay:-9s;font-size:28px}
+        .float-flower:nth-child(5){top:40%;right:3%;animation-delay:-12s}
+        .float-flower:nth-child(6){top:50%;left:8%;animation-delay:-2s;font-size:20px}
+        @keyframes float-slow {
+            0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-20px) rotate(10deg)}
+            50%{transform:translateY(0) rotate(-5deg)}75%{transform:translateY(15px) rotate(5deg)}
+        }
+
+        /* ===== LOADING ===== */
+        .loading-screen {
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:linear-gradient(135deg,#fff4f8,#f6c8da 55%,#ffeaf1); z-index:9999;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            transition:opacity 1s ease, visibility 1s ease;
+        }
+        .loading-screen.hidden { opacity:0; visibility:hidden; }
+        .loading-flower { font-size:60px; animation:spin-bloom 2s ease-in-out infinite; }
+        @keyframes spin-bloom { 0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.3)}100%{transform:rotate(360deg) scale(1)} }
+        .loading-text { font-family:'Great Vibes',cursive; font-size:1.8rem; color:#a83868; margin-top:20px; animation:pulse 1.5s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:0.5}50%{opacity:1} }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            .main-container { padding: 28px 12px 20px; }
+            .header { margin-bottom: 20px; }
+            .header h1 { font-size: clamp(2.1rem, 10vw, 3.2rem); }
+            .header .date-badge { padding: 8px 22px; letter-spacing: 2px; }
+            .lily-garden { width: 100%; gap: 0; margin: 24px 0 10px; }
+            .lily-unit { width: min(60px, calc((100vw - 24px) / 7)); }
+            .bloom-head { width: 60px !important; height: 60px !important; }
+            .petal { width: 16px !important; height: 32px !important; margin-left: -8px !important; margin-top: -32px !important; }
+            .card-wrapper, .wishes-section { width: 100%; margin: 24px 0; }
+            .greeting-card, .wish-card { width: 100%; padding: 28px 20px; border-radius: 22px; }
+            .card-message { line-height: 1.7; }
+            .big-bloom { width: 170px; height: 170px; }
+            .big-bloom .petal { width: 28px !important; height: 58px !important; margin-left: -14px !important; margin-top: -58px !important; }
+            .big-bloom .inner { width: 20px !important; height: 42px !important; margin-left: -10px !important; margin-top: -42px !important; }
+            .gallery { width: 100%; gap: 12px; margin: 28px 0; }
+            .gallery-item { width: min(42vw, 160px); height: clamp(132px, 52vw, 210px); }
+            .gallery-label { padding: 12px 6px; font-size: 1rem; }
+            .wish-card { padding: 28px 18px; }
+            .wishes-list li { font-size: 1.05rem; }
+            .music-control { top: 10px; right: 10px; gap: 6px; }
+            .music-label { font-size: 10px; }
+            .music-btn { width: 44px; height: 44px; font-size: 20px; }
+            .footer { margin-top: 32px; }
+        }
+
+        @media (max-width: 360px) {
+            .music-label { max-width: 100px; white-space: normal; text-align: right; }
+            .card-message { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-flower">🌺</div>
+        <div class="loading-text">Hoa đang nở rộ...</div>
+    </div>
+
+    <!-- Music -->
+    <audio id="bgMusic" autoplay loop preload="auto"><source src="Low G - In Love (ft. JustaTee) - L2K The Album.mp3" type="audio/mpeg"></audio>
+    <div class="music-control">
+        <span class="music-label">Bật nhạc</span>
+        <button class="music-btn" id="musicBtn" type="button" aria-label="Bật nhạc" aria-pressed="false">🎵</button>
+    </div>
+
+    <!-- Butterflies -->
+    <div class="butterfly">🦋</div>
+    <div class="butterfly">🦋</div>
+
+    <!-- Background Flowers -->
+    <div class="floating-flowers">
+        <div class="float-flower">🌸</div><div class="float-flower">🌺</div>
+        <div class="float-flower">🌷</div><div class="float-flower">🌹</div>
+        <div class="float-flower">💐</div><div class="float-flower">🌻</div>
+    </div>
+
+    <div class="particles-container" id="particlesContainer"></div>
+    <div id="fallingPetals"></div>
+
+    <!-- MAIN -->
+    <div class="main-container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Chúc Mừng Ngày<br>Phụ Nữ Việt Nam</h1>
+            <div class="date-badge">✨ 20 - 10 ✨</div>
+        </div>
+
+        <!-- ===== LILY GARDEN (hoa gắn liền thân) ===== -->
+        <div class="lily-garden">
+
+            <!-- Lily 1 -->
+            <div class="lily-unit c-pink">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:130px;"></div>
+                    <div class="leaf l" style="top:60px; animation-delay:2.5s;"></div>
+                    <div class="leaf r" style="top:95px; animation-delay:2.8s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 2 -->
+            <div class="lily-unit c-red">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:150px;"></div>
+                    <div class="leaf l" style="top:65px; animation-delay:2.7s;"></div>
+                    <div class="leaf r" style="top:105px; animation-delay:3s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 3 (center, taller) -->
+            <div class="lily-unit c-coral">
+                <div class="bloom-head" style="width:105px; height:105px;">
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="petal" style="width:28px;height:55px;margin-left:-14px;margin-top:-55px;"></div>
+                    <div class="bloom-center"><div class="pistil" style="width:14px;height:14px;"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:175px;"></div>
+                    <div class="leaf l" style="top:60px; animation-delay:2.3s;"></div>
+                    <div class="leaf r" style="top:105px; animation-delay:2.6s;"></div>
+                    <div class="leaf l" style="top:140px; animation-delay:2.9s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 4 -->
+            <div class="lily-unit c-white">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:140px;"></div>
+                    <div class="leaf l" style="top:55px; animation-delay:2.9s;"></div>
+                    <div class="leaf r" style="top:95px; animation-delay:3.2s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 5 -->
+            <div class="lily-unit c-peach">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:155px;"></div>
+                    <div class="leaf l" style="top:60px; animation-delay:2.6s;"></div>
+                    <div class="leaf r" style="top:100px; animation-delay:2.9s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 6 -->
+            <div class="lily-unit c-violet">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:125px;"></div>
+                    <div class="leaf l" style="top:50px; animation-delay:3s;"></div>
+                    <div class="leaf r" style="top:85px; animation-delay:3.3s;"></div>
+                </div>
+            </div>
+
+            <!-- Lily 7 -->
+            <div class="lily-unit c-gold">
+                <div class="bloom-head">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="bloom-center"><div class="pistil"></div>
+                        <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    </div>
+                </div>
+                <div class="stem-wrap">
+                    <div class="stem-line" style="height:135px;"></div>
+                    <div class="leaf l" style="top:55px; animation-delay:2.4s;"></div>
+                    <div class="leaf r" style="top:90px; animation-delay:2.7s;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIG BLOOM -->
+        <div class="bloom-section">
+            <div class="big-bloom c-pink">
+                <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                <div class="petal inner"></div><div class="petal inner"></div><div class="petal inner"></div><div class="petal inner"></div>
+                <div class="petal inner"></div><div class="petal inner"></div><div class="petal inner"></div><div class="petal inner"></div>
+                <div class="bloom-center"><div class="pistil"></div>
+                    <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                    <div class="stamen"></div><div class="stamen"></div><div class="stamen"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Greeting Card -->
+        <div class="card-wrapper">
+            <div class="greeting-card">
+                <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+                <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+                <div class="card-flower-img"><span class="emoji-bouquet">💐</span></div>
+                <h2 class="card-title">Happy Vietnamese Women's Day</h2>
+                <div class="card-divider"></div>
+                <div class="card-message">
+                    <p>Gửi đến những người phụ nữ tuyệt vời nhất,</p>
+                    <p class="highlight">Cảm ơn vì sự dịu dàng, mạnh mẽ<br>và tình yêu thương vô bờ bến 💕</p>
+                    <p>Chúc các chị, các mẹ, các bạn gái<br>luôn xinh đẹp, hạnh phúc và thành công!</p>
+                    <p>Mỗi ngày đều rực rỡ như những đóa hoa 🌸<br>và tràn đầy niềm vui, tiếng cười!</p>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-signature">Với tất cả tình yêu thương 💝</div>
+                <div class="card-footer-flowers">🌹🌷🌺🌸🌹</div>
+            </div>
+        </div>
+
+        <!-- ===== GALLERY: CSS FLOWERS thay emoji ===== -->
+        <div class="gallery">
+            <!-- Card 1: Hoa Ly nở vòng lặp -->
+            <div class="gallery-item">
+                <div class="g-lily">
+                    <div class="gp"></div><div class="gp"></div><div class="gp"></div>
+                    <div class="gp"></div><div class="gp"></div><div class="gp"></div>
+                    <div class="gc"></div>
+                </div>
+                <div class="g-lily-stem"></div>
+                <div class="gallery-label">Hoa Ly Tươi Tắn</div>
+            </div>
+
+            <!-- Card 2: Hoa Hồng xoay -->
+            <div class="gallery-item">
+                <div class="g-rose">
+                    <div class="rp"></div><div class="rp"></div><div class="rp"></div><div class="rp"></div>
+                    <div class="rp"></div><div class="rp"></div><div class="rp"></div><div class="rp"></div>
+                    <div class="rc"></div>
+                </div>
+                <div class="gallery-label">Hoa Hồng Quý Phái</div>
+            </div>
+
+            <!-- Card 3: Hoa Sen nhịp thở -->
+            <div class="gallery-item">
+                <div class="g-lotus">
+                    <div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div>
+                    <div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div>
+                    <div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div>
+                    <div class="lc"></div>
+                </div>
+                <div class="gallery-label">Hoa Sen Thanh Khiết</div>
+            </div>
+        </div>
+
+        <!-- Wishes -->
+        <div class="wishes-section">
+            <div class="wish-card">
+                <h2 class="wish-title">Lời Chúc Yêu Thương</h2>
+                <ul class="wishes-list">
+                    <li>Chúc bạn luôn xinh đẹp và rạng rỡ như ánh bình minh</li>
+                    <li>Mãi mãi tràn đầy sức khỏe, hạnh phúc và may mắn</li>
+                    <li>Thành công trên mọi con đường bạn đi</li>
+                    <li>Được yêu thương, trân trọng mỗi ngày</li>
+                    <li>Nụ cười luôn nở trên môi, niềm vui ngập tràn trong tim 💖</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>~ Ngày Phụ Nữ Việt Nam 20/10 ~</p>
+            <div class="hearts">💕💖💝💗💕</div>
+            <p style="margin-top:20px;font-size:0.95rem;">Made with ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load',()=>{ setTimeout(()=>{ document.getElementById('loadingScreen').classList.add('hidden'); },2000); });
+
+        // Particles
+        (function(){
+            const c = document.getElementById('particlesContainer'), types=['heart','star','petal'];
+            for(let i=0;i<35;i++){
+                const p=document.createElement('div'),t=types[Math.floor(Math.random()*types.length)];
+                p.className=`particle ${t}`; p.style.left=Math.random()*100+'%';
+                p.style.fontSize=(Math.random()*15+12)+'px';
+                p.style.animationDuration=(Math.random()*10+10)+'s';
+                p.style.animationDelay=(Math.random()*15)+'s'; c.appendChild(p);
+            }
+        })();
+
+        // Falling petals
+        (function(){
+            const c=document.getElementById('fallingPetals'),ps=['🌸','🏵️','💮','🌺','🪷'];
+            for(let i=0;i<20;i++){
+                const p=document.createElement('div'); p.className='falling-petal';
+                p.textContent=ps[Math.floor(Math.random()*ps.length)];
+                p.style.left=Math.random()*100+'%'; p.style.fontSize=(Math.random()*15+14)+'px';
+                p.style.animationDuration=(Math.random()*8+8)+'s'; p.style.animationDelay=(Math.random()*20)+'s';
+                p.style.opacity=Math.random()*0.5+0.3; c.appendChild(p);
+            }
+        })();
+
+        // Continuous petals
+        setInterval(()=>{
+            const c=document.getElementById('fallingPetals'),ps=['🌸','🏵️','💮','🌺','🪷','🌹'];
+            const p=document.createElement('div'); p.className='falling-petal';
+            p.textContent=ps[Math.floor(Math.random()*ps.length)];
+            p.style.left=Math.random()*100+'%'; p.style.fontSize=(Math.random()*12+14)+'px';
+            p.style.animationDuration=(Math.random()*6+7)+'s'; p.style.opacity=Math.random()*0.4+0.3;
+            c.appendChild(p); setTimeout(()=>p.remove(),15000);
+        },800);
+
+        // Sparkle click
+        document.addEventListener('click',(e)=>{
+            const colors=['#ff6b9d','#ffa8c5','#ff9ff3','#f9ca24','#ff7675','#fd79a8'];
+            for(let i=0;i<12;i++){
+                const s=document.createElement('div');
+                s.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:9998;`;
+                const col=colors[Math.floor(Math.random()*colors.length)];
+                s.style.background=col; s.style.boxShadow=`0 0 6px ${col}`;
+                const a=(Math.PI*2*i)/12, d=Math.random()*80+40;
+                s.style.setProperty('--x',Math.cos(a)*d+'px'); s.style.setProperty('--y',Math.sin(a)*d+'px');
+                s.style.animation='sparkle-fly 0.8s ease-out forwards';
+                document.body.appendChild(s); setTimeout(()=>s.remove(),900);
+            }
+        });
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
